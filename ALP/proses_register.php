@@ -11,9 +11,9 @@ include 'connect.php';
 if (isset($_POST['submit_register'])) {
     $username = $_POST['name'];
     $email = $_POST['email'];
-    $plain_password = $_POST['password_user']; // Mengambil password mentah
+    $plain_password = $_POST['password_user']; // mengambil password mentah
 
-    // Enkripsi password mentah menjadi hash BCRYPT yang aman
+    // enkripsi password mentah menjadi hash BCRYPT yang aman
     $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
 
 
@@ -32,5 +32,4 @@ if (isset($_POST['submit_register'])) {
     }
 }
 $conn->close();
-exit;
 ?>

@@ -4,11 +4,11 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include 'connect.php'; // Hubungkan kabel database
+include 'connect.php';
 
 function showCategorizedWallpaper($conn)
 {
-    // 1. Tangkap nama kategori yang diklik dari URL (?name=...)
+    // tangkap nama kategori ($_GET) yang diklik dari URL halaman sebelumnya yakni index.html di bagian: (?name=...)
     if (isset($_GET['name'])) {
         $category_name = mysqli_real_escape_string($conn, $_GET['name']);
         echo "<h2 class ='text-[rgb(246,246,246)] text-2xl lg:text-7xl text-left lg:px-20 lg:pt-20'>$category_name</h2>";
@@ -20,7 +20,7 @@ function showCategorizedWallpaper($conn)
         return mysqli_query($conn, $query);
 
     } else {
-        // Jika diakses langsung tanpa ngeklik kategori, alihkan ke halaman utama
+        // jika diakses langsung tanpa ngeklik kategori, alihkan ke halaman utama
         header("Location: index.php");
         exit();
     }
@@ -38,6 +38,7 @@ function showCategorizedWallpaper($conn)
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
+<!-- mengambil nilai dari function yang akan dipakai untuk tunjukin wallpaperr di dalam categories page -->
 <?php
 $result = showCategorizedWallpaper($conn);
 ?>

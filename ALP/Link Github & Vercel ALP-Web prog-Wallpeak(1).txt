@@ -1,0 +1,12 @@
+﻿Nama: Erick Wahyudi Hartono & Kenneth Kendrick Utomo
+NIM: 1076012510007 & 1076012510048
+Kelas: B
+Mata Kuliah: Web Programming
+
+
+
+Vercel: 
+https://vercel-web-prog-wallpeak-94e7.vercel.app/ 
+
+Github:
+https://github.com/ewahyudi01-ship-it/ALP---Web-Prog-Erick-Wahyudi-Hartono--Kenneth-Kendrick-Utomo.git

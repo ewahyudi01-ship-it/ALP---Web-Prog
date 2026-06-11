@@ -69,12 +69,14 @@
                     ini_set('display_errors', 1);
 
                     include 'connect.php';
-                    $sql = "SELECT balance_user AS balance_user FROM users";
+                    $user_id = $_SESSION['user_id'];
 
-                    $result = mysqli_query($conn, $sql);
-                    $queryTotalTerjual = $result;
+                    $sql2 = "SELECT balance_user
+                    FROM users
+                    WHERE user_id = $user_id";
 
-                    $data = mysqli_fetch_assoc($queryTotalTerjual);
+                    $result = mysqli_query($conn, $sql2);
+                    $data = mysqli_fetch_assoc($result);
 
                     echo '<div class="text-white font-bold text-sm">' . "Rp. " . $data["balance_user"] . '</div>';
                     ?>
@@ -82,7 +84,7 @@
             </div>
             <!-- kolom ketiga -->
             <div class=" bg-[rgb(33,37,41)] rounded-xl max-w-fit px-5 py-8 flex flex-row items-center gap-3">
-                <p class="text-[16px] font-bold text-white">Total wallpapers created</p>
+                <p class="text-[16px] font-bold text-white">Total wallpapers created on Wallpeak</p>
                 <div class="bg-[rgb(242,125,0)] px-3 py-2 rounded-xl max-w-fit h-auto">
                     <?php
 
@@ -90,9 +92,9 @@
                     ini_set('display_errors', 1);
 
                     include 'connect.php';
-                    $sql = "SELECT COUNT(*) AS total_wallpaper FROM wallpapers";
+                    $sql3 = "SELECT COUNT(*) AS total_wallpaper FROM wallpapers";
 
-                    $result = mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sql3);
                     $queryTotalTerjual = $result;
 
                     $data = mysqli_fetch_assoc($queryTotalTerjual);
@@ -115,36 +117,53 @@
                     </div>
                 </div>
         </a>
-    </div>
 
-    <!-- tunjukin semua wallpaper dari database -->
-    <div class="relative flex flex-wrap max-w-fit gap-4">
-        <?php
-        $query = "SELECT * FROM wallpapers";
-        $result = mysqli_query($conn, $query);
-        ?>
+        <div class=" bg-[rgb(33,37,41)] rounded-xl max-w-fit px-5 py-8 flex flex-row items-center gap-3">
+            
+        <form action="topup.php" method="POST">
+        <input type="number"
+           name="amount"
+           placeholder="Top Up Amount"
+           required
+           class="w-full px-4 py-3 bg-[#2a2c4e]/60 border border-white/10 rounded-xl text-white">
 
-        <?php
-        while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-            <div class="bg-[rgb(45,47,47)] p-3 rounded-xl">
-                <img src="<?php echo $row['file_path']; ?>" class="h-40 rounded">
+            <button type="submit"
+            name="submit_topup" onclick="return confirm('Are you sure want topup?')"
+            class="bg-[rgb(115,79,225)] px-3 py-2 rounded-xl text-white font-bold">
+            Top Up
+            </button>
+        </form>
 
-                <p class="text-white font-bold">
-                    <?php echo $row['name_wallpaper']; ?>
-                </p>
-
-                <a href="delete.php?id=<?php echo $row['wallpaper_id']; ?>" onclick="return confirm('Delete wallpaper?')"
-                    class="bg-red-400 text-xs font-bold text-white px-3 py-2 rounded-xl gap-2">
-                    Delete
-                </a>
             </div>
-            <?php
-        }
-        ?>
-    </div>
+        </div>
 
+        <!-- tunjukin semua wallpaper dari database -->
+        <?php if ($_SESSION['role'] === 'owner') { ?>
 
+            <div class="relative flex flex-wrap max-w-fit gap-4">
+                <?php
+                $query = "SELECT * FROM wallpapers";
+                $result = mysqli_query($conn, $query);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                    <div class="bg-[rgb(45,47,47)] p-3 rounded-xl">
+                        <img src="<?php echo $row['file_path']; ?>" class="h-40 rounded">
+
+                        <p class="text-white font-bold">
+                            <?php echo $row['name_wallpaper']; ?>
+                        </p>
+
+                        <a href="delete.php?id=<?php echo $row['wallpaper_id']; ?>"
+                            onclick="return confirm('Delete wallpaper?')"
+                            class="bg-red-400 text-xs font-bold text-white px-3 py-2 rounded-xl">
+                            Delete
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
+
+        <?php } ?>
 
     </div>
 

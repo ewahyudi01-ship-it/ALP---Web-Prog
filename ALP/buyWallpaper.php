@@ -30,10 +30,7 @@ $price = $wallpaper['price_wallpaper'];
 // periksa transaksi
 if($user['balance_user'] >= $wallpaper['price_wallpaper']) {
 
-    if($_SESSION['role'] != 'owner'){
         $newBalance = $user['balance_user'] - $wallpaper['price_wallpaper'];
-
-    $newBalance = $user['balance_user'] - $wallpaper['price_wallpaper'];
 
     mysqli_query(
     $conn,
@@ -41,7 +38,7 @@ if($user['balance_user'] >= $wallpaper['price_wallpaper']) {
      SET balance_user = $newBalance
      WHERE user_id = $user_id"
 );
-    }
+    
 
 // simpan transaksi (berhasil bayar)
 mysqli_query(
@@ -50,6 +47,13 @@ mysqli_query(
     (buyer_id, wallpaper_id, date_bought, price, status)
     VALUES
     ($user_id, $wallpaper_id, NOW(), $price, 'complete')"
+);
+
+mysqli_query(
+    $conn,
+    "UPDATE users
+     SET balance_user = balance_user + $price
+     WHERE role = 'owner'"
 );
 
     //header("Location: infoWallpaper.php?id=$wallpaper_id&success=1");
@@ -68,6 +72,7 @@ mysqli_query(
 );
     echo "<script>
     alert('Insufficient balance :(');
+    exit;
     </script>";
 }
 

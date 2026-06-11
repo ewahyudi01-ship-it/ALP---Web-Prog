@@ -43,7 +43,7 @@
                 <input 
                     type="text" 
                     name="donations" 
-                    placeholder="ammounts" 
+                    placeholder="Rp. " 
                     required
                     class="w-full px-4 py-3 bg-[#2a2c4e]/60 border border-white/10 rounded-xl text-white placeholder-gray-400 text-sm">
 
@@ -58,6 +58,7 @@
 
     <rooter class="flex flex-col items-end px:5 lg:px-30 mt-60 text-white">
         <p>IG: eriick_881009</p>
+        <p>LINE: e.rck_lune.</p>
     </rooter>
 </body>
 

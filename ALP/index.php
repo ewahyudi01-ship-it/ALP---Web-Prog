@@ -37,10 +37,9 @@
 
         if (isset($_SESSION['username'])) {
 
-            // JIKA USER ADALAH OWNER
-            if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner') {
+    
                 echo '<li class="nav-item rounded-2xl bg-orange-200 text-black p-1 px-3"><a class="nav-link" href="dashboard.php">Dashboard</a></li>';
-            } 
+            
         } 
         ?>
 

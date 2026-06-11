@@ -57,7 +57,7 @@ $data = mysqli_fetch_assoc($result);
 
             <div class="bg-[rgb(36,37,38)] p-5 rounded-2xl">
                 <div class="bg-[rgb(48,49,50)] p-3 max-w-fit">
-                    <a href="categories.php?name=<?php echo $name_category ?>"
+                    <a href="categories.php?name=<?php echo $name_category; ?>"
                         class="text-sm text-white/80"><?php echo $name_category; ?></a>
                 </div>
 
@@ -66,7 +66,7 @@ $data = mysqli_fetch_assoc($result);
 
                 <form action="buyWallpaper.php" method="POST">
                     <input type="hidden" name="wallpaper_id" value="<?php echo $data['wallpaper_id']; ?>">
-                    <button type="submit" class="max-w-fit py-3 px-3 bg-orange-600 text-white font-semibold rounded-xl">
+                    <button type="submit" onclick="return confirm('Are you sure want to purchase?')" class="max-w-fit py-3 px-3 bg-orange-600 text-white font-semibold rounded-xl">
                         Buy Wallpaper
                     </button>
                 </form>
@@ -74,7 +74,7 @@ $data = mysqli_fetch_assoc($result);
 
         </div>
         <div class="bg-[rgb(55,114,145)] pt-3 px-1 pb-1 rounded-2xl mt-15 lg:mt-20">
-            <p class="text-white font-bold text-2xl lg:text-[35px] pl-5">Description</pclass>
+            <p class="text-white font-bold text-2xl lg:text-[35px] pl-5">Description</p>
             </p>
 
             <div class="bg-[rgb(36,37,38)] p-5 rounded-2xl">
